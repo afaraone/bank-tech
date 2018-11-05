@@ -10,6 +10,12 @@ class Account
     self.balance += amount
   end
 
+  def withdraw(amount)
+    raise 'Insufficient balance' if self.balance < amount
+    self.balance -= amount
+  end
+
   private
+
   attr_writer :balance
 end
