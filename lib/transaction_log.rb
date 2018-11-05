@@ -5,13 +5,9 @@ class TransactionLog
     @list = []
   end
 
-  def record_deposit(amount, balance)
-    log = { date: Time.now, credit: amount, debit: nil, balance: balance }
-    list << log
-  end
-
-  def record_withdrawal(amount, balance)
-    log = { date: Time.now, credit: nil, debit: amount, balance: balance }
+  def record(amount, balance, type)
+    log = { date: Time.now, balance: balance }
+    log[type] = amount
     list << log
   end
 end
