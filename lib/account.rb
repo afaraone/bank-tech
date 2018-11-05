@@ -12,6 +12,7 @@ class Account
 
   def withdraw(amount)
     raise 'Insufficient balance' if self.balance < amount
+
     self.balance -= amount
   end
 

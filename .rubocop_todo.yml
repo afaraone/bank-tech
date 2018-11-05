@@ -15,6 +15,10 @@ Layout/SpaceInsideBlockBraces:
   Exclude:
     - 'Gemfile'
 
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+
 # Offense count: 1
 # Cop supports --auto-correct.
 Style/BlockComments:

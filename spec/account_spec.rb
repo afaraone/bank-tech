@@ -27,11 +27,11 @@ describe Account do
     it { is_expected.to respond_to(:withdraw).with(1).argument }
 
     context 'balance greater than withdraw amount' do
-      before { subject.deposit(20000)}
+      before { subject.deposit 2000 }
 
       it 'deducts argument from @balance' do
-        subject.withdraw(5000)
-        expect(subject.balance).to eq (15000)
+        subject.withdraw(500)
+        expect(subject.balance).to eq 1500
       end
     end
 
