@@ -8,13 +8,14 @@ class Account
 
   def deposit(amount)
     self.balance += amount
-    transaction_log.record_deposit(amount, balance)
+    transaction_log.record(amount, balance, :credit)
   end
 
   def withdraw(amount)
     raise 'Insufficient balance' if self.balance < amount
 
     self.balance -= amount
+    transaction_log.record(amount, balance, :debit)
   end
 
   private

@@ -5,7 +5,7 @@ describe Account do
   subject { described_class.new(mock_transaction_log) }
 
   before do
-    allow(mock_transaction_log).to receive(:record_deposit)
+    allow(mock_transaction_log).to receive(:record)
   end
 
   describe 'initialization' do
@@ -19,28 +19,29 @@ describe Account do
   end
 
   describe '#deposit' do
-    it { is_expected.to respond_to(:deposit).with(1).argument }
-
     it 'increases @balance by argument' do
       subject.deposit 1000
       expect(subject.balance).to eq 1000
     end
 
-    it 'calls record_deposit with amount and balance as args' do
-      expect(subject.transaction_log).to receive(:record_deposit).with(1000, 1000)
+    it 'calls record with amount, :credit and balance as args' do
+      expect(subject.transaction_log).to receive(:record).with(1000, 1000, :credit)
       subject.deposit(1000)
     end
   end
 
   describe '#withdraw' do
-    it { is_expected.to respond_to(:withdraw).with(1).argument }
-
     context 'balance greater than withdraw amount' do
       before { subject.deposit 2000 }
 
       it 'deducts argument from @balance' do
         subject.withdraw(500)
         expect(subject.balance).to eq 1500
+      end
+
+      it 'calls record with amount, :debit and balance as args' do
+        expect(subject.transaction_log).to receive(:record).with(500, 1500, :debit)
+        subject.withdraw(500)
       end
     end
 
