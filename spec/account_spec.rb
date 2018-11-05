@@ -1,16 +1,20 @@
 require 'account'
 
 describe Account do
-  let(:mock_transaction) { double(:mock_transaction) }
-  subject { described_class.new(mock_transaction) }
+  let(:mock_transaction_log) { double(:mock_transaction_log) }
+  subject { described_class.new(mock_transaction_log) }
+
+  before do
+    allow(mock_transaction_log).to receive(:record_deposit)
+  end
 
   describe 'initialization' do
     it 'has balance variable set to 0' do
       expect(subject.balance).to eq 0
     end
 
-    it 'has an injected transaction obj' do
-      expect(subject.transaction).to eq mock_transaction
+    it 'has an injected transaction_log obj' do
+      expect(subject.transaction_log).to eq mock_transaction_log
     end
   end
 
@@ -20,6 +24,11 @@ describe Account do
     it 'increases @balance by argument' do
       subject.deposit 1000
       expect(subject.balance).to eq 1000
+    end
+
+    it 'calls record_deposit with amount and balance as args' do
+      expect(subject.transaction_log).to receive(:record_deposit).with(1000, 1000)
+      subject.deposit(1000)
     end
   end
 
