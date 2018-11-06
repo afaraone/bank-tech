@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Formats transaction into user-friendly format
 class Display
   attr_reader :list, :sep
   COLUMNS = %i[date credit debit balance].freeze
@@ -12,7 +13,7 @@ class Display
 
   def statement
     puts header
-    self.list.each { |row| puts format_row(row) }
+    list.each { |row| puts format_row(row) }
   end
 
   private

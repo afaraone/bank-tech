@@ -15,6 +15,10 @@ Layout/SpaceInsideBlockBraces:
   Exclude:
     - 'Gemfile'
 
+Metrics/LineLength:
+  Exclude:
+    - 'spec/**/*'
+
 Metrics/BlockLength:
   Exclude:
     - 'spec/**/*'

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Stores and manipulates balance
 class Account
   attr_reader :balance, :transaction_log
   START_BALANCE = 0

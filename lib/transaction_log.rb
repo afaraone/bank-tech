@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Records transactions
 class TransactionLog
   attr_accessor :list
 
