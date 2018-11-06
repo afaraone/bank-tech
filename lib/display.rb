@@ -10,6 +10,11 @@ class Display
     @sep = DEFAULT_SEPARATOR
   end
 
+  def statement
+    puts header
+    self.list.each { |row| puts format_row(row) }
+  end
+
   def header
     COLUMNS.join(sep)
   end
