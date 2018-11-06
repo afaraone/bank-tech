@@ -9,9 +9,13 @@ class TransactionLog
   end
 
   def record(amount, balance, type)
-    log = { date: format_time(Time.now), balance: balance }
-    log[type] = amount
+    log = { date: format_time(Time.now), balance: format_number(balance) }
+    log[type] = format_number(amount)
     list.prepend(log)
+  end
+
+  def format_number(number)
+    "%.2f" %  number
   end
 
   private

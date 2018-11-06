@@ -4,7 +4,7 @@
 class Account
   attr_reader :balance, :transaction_log, :display
 
-  START_BALANCE = 0
+  START_BALANCE = 0.00
 
   def initialize(transaction_log = TransactionLog.new, display = Display.new)
     @balance = START_BALANCE
