@@ -1,6 +1,14 @@
+# frozen_string_literal: true
+
 require 'transaction_log'
 
 describe TransactionLog do
+  let(:date) { Time.parse('2018-09-09') }
+
+  before do
+    allow(Time).to receive(:now).and_return(date)
+  end
+
   describe 'initialise' do
     it 'has @list set to an empty array' do
       expect(subject.list).to eq []
@@ -8,16 +16,8 @@ describe TransactionLog do
   end
 
   describe 'record' do
-    let(:date) { Time.parse('2018-09-09') }
-
-    before do
-      allow(Time).to receive(:now).and_return(date)
-    end
-
-    it { is_expected.to respond_to(:record).with(3).arguments}
-
     context 'when transaction is withdrawal' do
-      let(:withdrawal_log) { { date: date, debit: 400, balance: 1000 } }
+      let(:withdrawal_log) { { date: '09/09/2018', debit: 400, balance: 1000 } }
 
       it 'adds withdrawal log to list' do
         subject.record(400, 1000, :debit)
@@ -26,12 +26,18 @@ describe TransactionLog do
     end
 
     context 'when transaction is deposit' do
-      let(:deposit_log) { { date: date, credit: 400, balance: 1000 } }
+      let(:deposit_log) { { date: '09/09/2018', credit: 400, balance: 1000 } }
 
       it 'adds deposit log to list' do
         subject.record(400, 1000, :credit)
         expect(subject.list).to eq([deposit_log])
       end
+    end
+  end
+
+  describe 'Time format' do
+    it 'returns time in user-friendly format' do
+      expect(subject.format_time(date)).to eq '09/09/2018'
     end
   end
 end

@@ -1,12 +1,12 @@
+# frozen_string_literal: true
+
 require 'account'
 
 describe Account do
   let(:mock_transaction_log) { double(:mock_transaction_log) }
   subject { described_class.new(mock_transaction_log) }
 
-  before do
-    allow(mock_transaction_log).to receive(:record)
-  end
+  before { allow(mock_transaction_log).to receive(:record) }
 
   describe 'initialization' do
     it 'has balance variable set to 0' do
@@ -15,6 +15,9 @@ describe Account do
 
     it 'has an injected transaction_log obj' do
       expect(subject.transaction_log).to eq mock_transaction_log
+    end
+
+    it 'has list set to transaction_log.list' do
     end
   end
 

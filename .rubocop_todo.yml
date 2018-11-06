@@ -47,3 +47,6 @@ Style/EmptyMethod:
 Style/StringLiterals:
   Exclude:
     - 'Gemfile'
+
+AllCops:
+  TargetRubyVersion: 2.5.1
