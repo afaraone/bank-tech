@@ -2,13 +2,14 @@
 
 # Stores and manipulates balance
 class Account
-  attr_reader :balance, :transaction_log
+  attr_reader :balance, :transaction_log, :display
 
   START_BALANCE = 0
 
-  def initialize(transaction_log = TransactionLog.new)
+  def initialize(transaction_log = TransactionLog.new, display = Display.new)
     @balance = START_BALANCE
     @transaction_log = transaction_log
+    @display = display
   end
 
   def deposit(amount)
@@ -21,6 +22,10 @@ class Account
 
     self.balance -= amount
     transaction_log.record(amount, balance, :debit)
+  end
+
+  def statement
+    display.statement(transaction_log.list)
   end
 
   private

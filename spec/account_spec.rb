@@ -4,9 +4,14 @@ require 'account'
 
 describe Account do
   let(:mock_transaction_log) { double(:mock_transaction_log) }
-  subject { described_class.new(mock_transaction_log) }
+  let(:mock_display) { double(:mock_display) }
+  subject { described_class.new(mock_transaction_log, mock_display) }
 
-  before { allow(mock_transaction_log).to receive(:record) }
+  before do
+    allow(mock_transaction_log).to receive(:record)
+    allow(mock_transaction_log).to receive(:list)
+    allow(mock_display).to receive(:statement)
+  end
 
   describe 'initialization' do
     it 'has balance variable set to 0' do
@@ -17,7 +22,8 @@ describe Account do
       expect(subject.transaction_log).to eq mock_transaction_log
     end
 
-    it 'has list set to transaction_log.list' do
+    it 'has injected display obj' do
+      expect(subject.display).to eq mock_display
     end
   end
 
@@ -52,6 +58,13 @@ describe Account do
       it 'raises error' do
         expect { subject.withdraw 1000 }.to raise_error 'Insufficient balance'
       end
+    end
+  end
+
+  describe '#statement' do
+    it 'calls statement on display with list as argument' do
+      expect(mock_display).to receive(:statement).with(mock_transaction_log.list)
+      subject.statement
     end
   end
 end
