@@ -10,9 +10,9 @@ describe Display do
 
     let(:statement) do
       ['date || credit || debit || balance',
-       '15/09/2018 || 200 ||  || 1700',
-       '12/09/2018 || 500 ||  || 1500',
-       '10/09/2018 ||  || 200 || 1000'].join("\n") + "\n"
+       '15/09/2018 || 200 || || 1700',
+       '12/09/2018 || 500 || || 1500',
+       '10/09/2018 || || 200 || 1000'].join("\n") + "\n"
     end
 
     it 'prints header row and full list of transactions' do
