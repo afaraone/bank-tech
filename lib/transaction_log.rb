@@ -11,7 +11,7 @@ class TransactionLog
   def record(amount, balance, type)
     log = { date: format_time(Time.now), balance: balance }
     log[type] = amount
-    list << log
+    list.prepend(log)
   end
 
   private
