@@ -34,10 +34,4 @@ describe TransactionLog do
       end
     end
   end
-
-  describe 'Time format' do
-    it 'returns time in user-friendly format' do
-      expect(subject.format_time(date)).to eq '09/09/2018'
-    end
-  end
 end
