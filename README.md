@@ -31,17 +31,67 @@ It is part of Makers Academy Tech Test week, where the focus is on creating work
  2.5.1 :003 > account.deposit(100.00)
  => [{:date=>"06/11/2018", :balance=>"100.00", :credit=>"100.00"}]
  ```
- 
+
  - `withdraw` deducts the argument from the balance and records a withdrawal log
  ```
  2.5.1 :004 > account.withdraw(30.00)
  => [{:date=>"06/11/2018", :balance=>"70.00", :debit=>"30.00"}, {:date=>"06/11/2018", :balance=>"100.00", :credit=>"100.00"}]
  ```
- 
+
  - `statement` prints out a formatted statement of all transactions
  ```
  2.5.1 :005 > account.statement
 date || credit || debit || balance
 06/11/2018 || || 30.00 || 70.00
 06/11/2018 || 100.00 || || 100.00
+```
+
+## Approach
+This app has 3 classes, `Account`, `TransactionLog`, `Display`.
+
+The responsibility of `TransactionLog` is to create a formatted transaction hash, consisting of `date`, `credit`, `debit` and `balance`.
+`Display` takes an array of hashes and presents them in a table using a separator `||`.
+
+`Account` takes the former classes as dependencies. When `withdraw` and `deposit` are called, `TransactionLog` will create a transaction hash.
+When `statement` is called, `Display` will output a table.
+
+## Reflection
+
+For the sake of DRYness I made some decisions that may have impacted the readability of my code (esp `format_row`).
+
+```
+def format_row(row)
+  output = []
+  COLUMNS.each { |col| output << row[col] }
+  output.join(SEP).squeeze(' ')
+end
+```
+
+Instead of:
+```
+def format_row(row)
+  row[:time] + ' || ' + row[:credit] + ' || ' + row[:debit] + ' || ' + row[:balance]
+end
+```
+
+
+ Furthermore I decided to only use one `record` method in `TransactionLog`
+ ```
+ def record(amount, balance, type)
+   log = { date: (Time.now), balance: (balance) }
+   log[type] = (amount)
+   list.prepend(log)
+ end
+ ```
+
+ As opposed to two very similar methods `record_deposit` and `record_withdrawal`
+
+```
+def record_deposit(amount, balance)
+  {date: Time.now, balance: balance, credit: amount, debit: nil}
+end
+
+def record_deposit(amount, balance)
+  {date: Time.now, balance: balance, credit: nil, debit: amount}
+end
 ```
