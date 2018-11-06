@@ -14,11 +14,11 @@ class TransactionLog
     list.prepend(log)
   end
 
+  private
+
   def format_number(number)
     "%.2f" %  number
   end
-
-  private
 
   def format_time(date)
     date.strftime('%d/%m/%Y')

@@ -38,10 +38,4 @@ describe TransactionLog do
       expect(subject.list).to eq([deposit_log, withdrawal_log])
     end
   end
-
-  describe '#format_number' do
-    it 'sets float to 2 decimal places' do
-      expect(subject.format_number(100.0)).to eq '100.00'
-    end
-  end
 end
