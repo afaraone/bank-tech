@@ -3,8 +3,6 @@
 # Formats transaction into user-friendly format
 class Display
   attr_reader :list, :sep
-  COLUMNS = %i[date credit debit balance].freeze
-  DEFAULT_SEPARATOR = ' || '
 
   def initialize(transaction_log = TransactionLog.new)
     @list = transaction_log.list
@@ -17,6 +15,9 @@ class Display
   end
 
   private
+
+  COLUMNS = %i[date credit debit balance].freeze
+  DEFAULT_SEPARATOR = ' || '
 
   def header
     COLUMNS.join(sep)
