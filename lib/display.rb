@@ -19,6 +19,6 @@ class Display
   def format_row(row)
     output = []
     COLUMNS.each { |col| output << row[col] }
-    output.join(SEP).squeeze(" ")
+    output.join(SEP).squeeze(' ')
   end
 end
