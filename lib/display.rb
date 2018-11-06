@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class Display
   attr_reader :list, :sep
-
+  COLUMNS = %i[date credit debit balance].freeze
   DEFAULT_SEPARATOR = ' || '
 
   def initialize(transaction_log = TransactionLog.new)
@@ -8,19 +10,13 @@ class Display
     @sep = DEFAULT_SEPARATOR
   end
 
-
-
-  def format_time(date)
-    date.strftime("%d/%m/%Y")
+  def header
+    COLUMNS.join(sep)
   end
 
-  #does this change translog list?
   def format_row(row)
     output = []
-    [:date, :credit, :debit, :balance].each do |col|
-      row[col] = format_time(row[col]) if col == :date 
-      output << row[col]
-    end
-    output.join(sep) + "\n"
+    COLUMNS.each { |col| output << row[col] }
+    output.join(sep)
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TransactionLog
   attr_accessor :list
 
@@ -6,8 +8,12 @@ class TransactionLog
   end
 
   def record(amount, balance, type)
-    log = { date: Time.now, balance: balance }
+    log = { date: format_time(Time.now), balance: balance }
     log[type] = amount
     list << log
+  end
+
+  def format_time(date)
+    date.strftime('%d/%m/%Y')
   end
 end
