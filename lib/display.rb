@@ -15,6 +15,8 @@ class Display
     self.list.each { |row| puts format_row(row) }
   end
 
+  private
+
   def header
     COLUMNS.join(sep)
   end
