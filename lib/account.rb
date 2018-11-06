@@ -6,7 +6,7 @@ class Account
 
   START_BALANCE = 0.00
 
-  def initialize(transaction_log = TransactionLog.new, display = Display.new)
+  def initialize(transaction_log: TransactionLog.new, display: Display.new)
     @balance = START_BALANCE
     @transaction_log = transaction_log
     @display = display

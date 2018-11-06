@@ -17,7 +17,7 @@ class TransactionLog
   private
 
   def format_number(number)
-    "%.2f" %  number
+    format('%.2f', number)
   end
 
   def format_time(date)

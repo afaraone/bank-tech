@@ -3,13 +3,14 @@
 require 'account'
 
 describe Account do
-  let(:mock_transaction_log) { double(:mock_transaction_log) }
+  let(:mock_log) { double(:mock_log) }
   let(:mock_display) { double(:mock_display) }
-  subject { described_class.new(mock_transaction_log, mock_display) }
+
+  subject { described_class.new(transaction_log: mock_log, display: mock_display) }
 
   before do
-    allow(mock_transaction_log).to receive(:record)
-    allow(mock_transaction_log).to receive(:list)
+    allow(mock_log).to receive(:record)
+    allow(mock_log).to receive(:list)
     allow(mock_display).to receive(:statement)
   end
 
@@ -19,7 +20,7 @@ describe Account do
     end
 
     it 'has an injected transaction_log obj' do
-      expect(subject.transaction_log).to eq mock_transaction_log
+      expect(subject.transaction_log).to eq mock_log
     end
 
     it 'has injected display obj' do
@@ -63,7 +64,7 @@ describe Account do
 
   describe '#statement' do
     it 'calls statement on display with list as argument' do
-      expect(mock_display).to receive(:statement).with(mock_transaction_log.list)
+      expect(mock_display).to receive(:statement).with(mock_log.list)
       subject.statement
     end
   end
