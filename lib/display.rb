@@ -9,16 +9,11 @@ class Display
 
   private
 
-  COLUMNS = %i[date credit debit balance].freeze
-  SEP = ' || '
-
   def header
-    COLUMNS.join(SEP)
+    "date || credit || debit || balance"
   end
 
   def format_row(row)
-    output = []
-    COLUMNS.each { |col| output << row[col] }
-    output.join(SEP).squeeze(' ')
+    "#{row[:date]} || #{row[:credit]} || #{row[:debit]} || #{row[:balance]}".squeeze(' ')
   end
 end
