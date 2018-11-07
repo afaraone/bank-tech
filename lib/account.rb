@@ -5,7 +5,7 @@ require_relative 'transaction_log'
 
 # Stores and manipulates balance
 class Account
-  attr_reader :balance, :transaction_log, :display
+  attr_reader :balance
 
   START_BALANCE = 0.00
 
@@ -17,18 +17,18 @@ class Account
 
   def deposit(amount)
     self.balance += amount
-    transaction_log.record(amount, balance, :credit)
+    @transaction_log.record(amount, balance, :credit)
   end
 
   def withdraw(amount)
     raise 'Insufficient balance' if insufficient?(amount)
 
     self.balance -= amount
-    transaction_log.record(amount, balance, :debit)
+    @transaction_log.record(amount, balance, :debit)
   end
 
   def statement
-    display.statement(transaction_log.list)
+    @display.statement(@transaction_log.list)
   end
 
   private

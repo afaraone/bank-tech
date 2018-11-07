@@ -21,7 +21,7 @@ describe Account do
     end
 
     it 'calls record with amount, :credit and balance as args' do
-      expect(subject.transaction_log).to receive(:record).with(1000, 1000, :credit)
+      expect(mock_log).to receive(:record).with(1000, 1000, :credit)
       subject.deposit(1000)
     end
   end
@@ -36,7 +36,7 @@ describe Account do
       end
 
       it 'calls record with amount, :debit and balance as args' do
-        expect(subject.transaction_log).to receive(:record).with(500, 1500, :debit)
+        expect(mock_log).to receive(:record).with(500, 1500, :debit)
         subject.withdraw(500)
       end
     end
