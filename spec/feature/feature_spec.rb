@@ -4,7 +4,7 @@ require 'account'
 require 'transaction_log'
 require 'display'
 
-describe 'Feature Test' do
+describe 'Feature Test based on Specification' do
   let(:date) { Time.parse('2012-01-10') }
   let(:date2) { Time.parse('2012-01-13') }
   let(:date3) { Time.parse('2012-01-14') }

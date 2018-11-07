@@ -14,20 +14,6 @@ describe Account do
     allow(mock_display).to receive(:statement)
   end
 
-  describe 'initialization' do
-    it 'has balance variable set to 0' do
-      expect(subject.balance).to eq 0
-    end
-
-    it 'has an injected transaction_log obj' do
-      expect(subject.transaction_log).to eq mock_log
-    end
-
-    it 'has injected display obj' do
-      expect(subject.display).to eq mock_display
-    end
-  end
-
   describe '#deposit' do
     it 'increases @balance by argument' do
       subject.deposit 1000
