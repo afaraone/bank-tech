@@ -9,18 +9,8 @@ class TransactionLog
   end
 
   def record(amount, balance, type)
-    log = { date: format_time(Time.now), balance: format_number(balance) }
-    log[type] = format_number(amount)
+    log = { date: Time.now, balance: balance }
+    log[type] = amount
     list.prepend(log)
-  end
-
-  private
-
-  def format_number(number)
-    format('%.2f', number)
-  end
-
-  def format_time(date)
-    date.strftime('%d/%m/%Y')
   end
 end

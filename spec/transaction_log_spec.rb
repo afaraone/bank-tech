@@ -10,8 +10,8 @@ describe TransactionLog do
   end
 
   describe 'record' do
-    let(:withdrawal_log) { { date: '09/09/2018', debit: '400.00', balance: '1000.00' } }
-    let(:deposit_log) { { date: '09/09/2018', credit: '400.00', balance: '1000.00' } }
+    let(:withdrawal_log) { { date: date, debit: 400.00, balance: 1000.00 } }
+    let(:deposit_log) { { date: date, credit: 400.00, balance: 1000.00 } }
     context 'when transaction is withdrawal' do
       it 'adds withdrawal log to list' do
         subject.record(400.00, 1000.00, :debit)
