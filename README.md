@@ -57,25 +57,7 @@ When `statement` is called, `Display` will output a table.
 
 ## Reflection
 
-For the sake of DRYness I made some decisions that may have impacted the readability of my code (esp `format_row`).
-
-```
-def format_row(row)
-  output = []
-  COLUMNS.each { |col| output << row[col] }
-  output.join(SEP).squeeze(' ')
-end
-```
-
-Instead of:
-```
-def format_row(row)
-  row[:time] + ' || ' + row[:credit] + ' || ' + row[:debit] + ' || ' + row[:balance]
-end
-```
-
-
- Furthermore I decided to only use one `record` method in `TransactionLog`
+To DRY up my code, I decided to only use one `record` method in `TransactionLog`
  ```
  def record(amount, balance, type)
    log = { date: (Time.now), balance: (balance) }
